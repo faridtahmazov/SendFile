@@ -42,18 +42,28 @@ public class Server {
             //File oxuma əmrləri
             System.out.print("Enter the file way: ");
             scanner = new Scanner(System.in);
+            String fileWay = scanner.nextLine();
             //  C:\Users\TahmazovFarid\Pictures\Me\FaridTahmazov.jpg
+            String[] format = fileWay.split("\\.");
 
-            byte[] array = FileUtility.readBytes(scanner.nextLine());
+            byte[] array = FileUtility.readBytes(fileWay);
+            dos.writeUTF(format[1]);
             dos.writeInt(array.length);
             dos.write(array);
-            System.out.println("Sended successfuly ✓");
+            System.out.println("✓ Sended successfuly");
 
             dos.close();
             dis.close();
 
-        }catch (IOException e){
-            e.printStackTrace();
+        }catch (NullPointerException npe){
+            System.out.println(npe.getMessage() + "! ");
+            System.out.println(Introduction.brace);
+        } catch (IOException e){
+            System.out.println(e.getMessage() + "! ");
+        }catch (Exception e1){
+            System.out.println("An unexpected error occurred: ");
+            e1.printStackTrace();
+            System.out.println(Introduction.brace);
         }
 
     }

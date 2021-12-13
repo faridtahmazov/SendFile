@@ -1,5 +1,6 @@
 import java.io.*;
 import java.net.Socket;
+import java.net.SocketException;
 import java.util.Scanner;
 
 public class Client {
@@ -34,14 +35,21 @@ public class Client {
             dos = new DataOutputStream(server.getOutputStream());
 
             //File
+            Scanner scanner = new Scanner(System.in);
+            System.out.print("Enter the received file name: ");
+            String fileName = scanner.nextLine();
+            String format = dis.readUTF();
             byte[] bytes = messageServer(dis);
-            FileUtility.writeBytes("C:\\Users\\TahmazovFarid\\Desktop\\Farid.jpg", bytes);
 
-            System.out.println("✓");
+            FileUtility.writeBytes("C:\\Users\\TahmazovFarid\\Desktop\\" + fileName + "." + format, bytes);
+
+            System.out.println("✓ Received successfuly!");
 
             dis.close();
             dos.close();
 
+        }catch (SocketException se){
+            System.out.println("Socket error!");
         }catch (Exception e){
             e.printStackTrace();
         }

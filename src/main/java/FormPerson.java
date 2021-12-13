@@ -21,10 +21,4 @@ public class FormPerson {
 
        return userdata;
    }
-
-    public static void main(String[] args) {
-        fullData();
-    }
-
-
 }

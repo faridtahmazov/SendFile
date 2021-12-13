@@ -20,18 +20,49 @@ public class TargetAddress {
             Scanner scanner = new Scanner(System.in);
             System.out.print("Enter ip:port is target: ");
             pai = scanner.nextLine();
-            arr = pai.split(":");
+
+            if (!pai.contains(":")){
+                System.out.println("You typed is wrong!");
+                System.out.println(Introduction.brace);
+                pai = null;
+                portAndIp();
+            } else{
+                arr = pai.split(":");
+            }
+
         }
         return arr;
     }
 
     public String targetIp(){
-        String ip = portAndIp()[0];
+        String ip=null;
+        try{
+            ip = portAndIp()[0];
+        }catch (NullPointerException exception){
+            System.out.println("IP error!");
+            System.out.println(Introduction.brace);
+            pai=null;
+            portAndIp();
+        }
         return ip;
     }
 
     public Integer targetPort(){
-        Integer port = Integer.parseInt(portAndIp()[1]);
+        Integer port = null;
+        try{
+            port = Integer.parseInt(portAndIp()[1]);
+        }catch (NumberFormatException nfe){
+            System.out.println("Port error!");
+            System.out.println(Introduction.brace);
+            pai=null;
+            portAndIp();
+        }catch (NullPointerException npe){
+            System.out.println("The port is marked as an integer! ");
+            System.out.println(Introduction.brace);
+            pai=null;
+            portAndIp();
+        }
+
         return port;
     }
 

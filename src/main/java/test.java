@@ -1,24 +1,20 @@
-import java.io.File;
-import java.io.IOException;
+import java.util.Scanner;
 
 public class test {
     public static void main(String[] args) {
-      File file = new File("C:\\Users\\TahmazovFarid\\Desktop\\foo.txt");
-      if (file.exists()){
-          System.out.println("Fayl artığ var");
-      }else{
-          try{
-              file.createNewFile();
-              System.out.println("Fayl yaradıldı!");
-          }catch (IOException e){
-              System.out.println("Fayl yaradılarkən bir xəta oldu!\nXəta mesajı: " + e.getMessage());
-          }
-      }
-      File changedName = new File("C:\\Users\\TahmazovFarid\\Desktop\\changed.txt");
-      file.renameTo(changedName);
-      changedName.delete();
-      file.delete();
-        System.out.println("Fayl silindi!");
+        Scanner scanner = new Scanner(System.in);
+        String fileWay =scanner.nextLine();
 
+        String[] format = fileWay.split("\\.");
+        if (fileWay.contains(".")){
+            System.out.println("Yes!");
+            for (int i=0; i<format.length; i++){
+                System.out.println(i+1 + ". " + format[i]);
+            }
+
+        }
+//        System.out.println("FileWay: " + fileWay);
+//        System.out.println("Format: " + format);
+//        System.out.println(format[0]);
     }
 }
