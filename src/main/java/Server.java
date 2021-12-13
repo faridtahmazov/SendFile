@@ -8,6 +8,7 @@ public class Server {
         //TANIMLAMALAR
 
         //İstifadəçi məlumatı
+        Introduction.intro();
         FormPerson.fullData();
         String name = FormPerson.name;
 

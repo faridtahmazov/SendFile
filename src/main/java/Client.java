@@ -8,6 +8,7 @@ public class Client {
         //TANIMLAMALAR
 
         //İstifadəçi məlumatı
+        Introduction.intro();
         FormPerson.fullData();
         String name = FormPerson.name;
 

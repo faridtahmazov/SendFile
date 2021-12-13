@@ -5,6 +5,6 @@ public class Introduction {
 
     public static void intro(){
         System.out.println(brace + "> File Chat <" + brace);
-        String formPerson = FormPerson.fullData();
+
     }
 }
