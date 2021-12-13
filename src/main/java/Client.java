@@ -13,25 +13,13 @@ public class Client {
         //Client üçün
         Socket server;
 
-        //İnput almaq üçün
-        Scanner scanner;
-
         //Giriş-çıxış üçün
         DataInputStream dis;
         DataOutputStream dos;
 
-        //File üçün
-        File file;
-        FileOutputStream fileOutputStream = null;
-        BufferedOutputStream bufferedOutputStream = null;
-
         //Dəyişənlər üçün
-        String message;
-        String line;
         String ip = User.ip();
         Integer port = User.port();
-
-
 
         try{
             //Porta qoşulmaq
@@ -45,38 +33,25 @@ public class Client {
             //Çıxış əməliyyatları
             dos = new DataOutputStream(server.getOutputStream());
 
-//            if (menu==1){
-//                //Data qəbul etmək (Message)
-//                message = dis.readUTF();
-//                System.out.println(message);
-//
-//                //Data göndərmək (Message)
-//                scanner = new Scanner(System.in);
-//                System.out.print(name + ": ");
-//                dos.writeUTF(name + ": " + scanner.nextLine());
-//                System.out.println("✓");
-//            }
             //File
-                file = new File("C:\\Users\\TahmazovFarid\\Desktop\\Farid.jpg");
-                fileOutputStream = new FileOutputStream(file, false);
-                bufferedOutputStream = new BufferedOutputStream(fileOutputStream);
-                int msgLen = dis.readInt();
-                byte[] bytes = new byte[msgLen];
-                dis.readFully(bytes);
-                bufferedOutputStream.write(bytes);
-                bufferedOutputStream.flush();
-                System.out.println("✓");
+            byte[] bytes = messageServer(dis);
+            FileUtility.writeBytes("C:\\Users\\TahmazovFarid\\Desktop\\Farid.jpg", bytes);
 
+            System.out.println("✓");
 
-
-            bufferedOutputStream.close();
             dis.close();
             dos.close();
-
-
 
         }catch (Exception e){
             e.printStackTrace();
         }
+    }
+
+    public static byte[] messageServer(DataInputStream dis) throws IOException{
+        int msgLen = dis.readInt();
+        byte[] bytes = new byte[msgLen];
+        dis.readFully(bytes);
+
+        return bytes;
     }
 }

@@ -23,16 +23,7 @@ public class Server {
         DataInputStream dis;
 
         //Dəyişənlər üçün
-        String message;
-        int line;
-        String readData;
         Integer port = User.port();
-
-        //File üçün
-        FileInputStream fileInputStream = null;
-        BufferedInputStream bufferedInputStream = null;
-
-
 
         try{
             //Port açmaq və əlaqələndirmək
@@ -48,39 +39,16 @@ public class Server {
             //Çıxış əməliyyatları
             dis = new DataInputStream(client.getInputStream());
 
-            //Message
-//            if (menu==1){
-//                //Data göndərmək
-//                scanner = new Scanner(System.in);
-//                System.out.print(name + ": ");
-//                dos.writeUTF(name + ": " + scanner.nextLine());
-//                System.out.println("✓");
-//
-//                //Data qəbul etmək
-//                message = dis.readUTF();
-//                System.out.println(message);
-//
-//            }
-            //File
-                System.out.print("Enter the file way: ");
-                scanner = new Scanner(System.in);
-                //  C:\Users\TahmazovFarid\Pictures\Me\FaridTahmazov.jpg
+            //File oxuma əmrləri
+            System.out.print("Enter the file way: ");
+            scanner = new Scanner(System.in);
+            //  C:\Users\TahmazovFarid\Pictures\Me\FaridTahmazov.jpg
 
-                //File oxuma əmrləri
-                File file = new File(scanner.nextLine());
-                byte array[] = new byte[(int) file.length()];
-                fileInputStream = new FileInputStream(file);
-                bufferedInputStream = new BufferedInputStream(fileInputStream);
+            byte[] array = FileUtility.readBytes(scanner.nextLine());
+            dos.writeInt(array.length);
+            dos.write(array);
+            System.out.println("Sended successfuly ✓");
 
-                bufferedInputStream.read(array);
-                dos.writeInt(array.length);
-                dos.write(array);
-
-                System.out.println("✓");
-
-
-
-            bufferedInputStream.close();
             dos.close();
             dis.close();
 
